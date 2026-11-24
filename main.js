@@ -177,6 +177,28 @@ async function slide(p, to, dur = 0.55, hop = 0) {
   });
   play(p, 'Idle');
 }
+// Attack style per piece. Pieces without a matching style fall back to 'slash' (humanoid) or 'bite'.
+const STYLE = {
+  dragons: { pawn: 'bite', knight: 'slash', bishop: 'slash', rook: 'breath', queen: 'breath', king: 'bite' },
+  ww2: { pawn: 'shot', knight: 'ram', bishop: 'shot', rook: 'cannon', queen: 'strafe', king: 'shot' },
+};
+function tracer(from, to, color = 0xffe08a) {
+  const g = new THREE.BufferGeometry().setFromPoints([from, to]);
+  const m = new THREE.LineBasicMaterial({ color, transparent: true });
+  const l = new THREE.Line(g, m); scene.add(l);
+  return tween(0.3, (k) => { m.opacity = 1 - k; }).then(() => { scene.remove(l); g.dispose(); m.dispose(); });
+}
+function slashArc(center, dir, color = 0xe6eeff) {
+  const geo = new THREE.RingGeometry(0.7, 1.05, 24, 1, -Math.PI / 2, Math.PI * 0.9);
+  const m = new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 1, side: THREE.DoubleSide });
+  const arc = new THREE.Mesh(geo, m);
+  arc.position.copy(center); arc.position.y = 1.0;
+  arc.lookAt(center.clone().add(dir).setY(1.0));
+  scene.add(arc);
+  let last = -0.8;
+  return tween(0.3, (k) => { const a = -0.8 + 1.6 * k; arc.rotateZ(a - last); last = a; m.opacity = 1 - k; })
+    .then(() => { scene.remove(arc); geo.dispose(); m.dispose(); });
+}
 async function strike(p, victimPos, onHit) {
   face(p, victimPos);
   const breath = p.actions.FireBreath ? 'FireBreath' : p.actions.PoisonBreath ? 'PoisonBreath' : null;
@@ -192,14 +214,51 @@ async function strike(p, victimPos, onHit) {
     play(p, 'Idle');
     return;
   }
-  let hit = false;
-  await tween(0.55, (k) => {
-    const w = Math.sin(Math.PI * k);
-    p.root.position.copy(base).addScaledVector(fwd, 0.5 * w);
-    p.inner.rotation.x = -0.2 * w;
-    if (p.humanoid) p.swing = k;
-    if (k >= 0.5 && !hit) { hit = true; onHit(); }
-  });
+  const style = STYLE[p.skinKey]?.[p.role] || (p.humanoid ? 'slash' : 'bite');
+  const shoulder = base.clone().addScaledVector(fwd, 0.6).setY(1.1);   // where a shot leaves
+  const aim = victimPos.clone().setY(1.1);
+  let hit = false, fired = false;
+  if (style === 'shot' || style === 'cannon') {
+    const shot = style === 'shot';
+    const dur = shot ? 0.5 : 0.6, fireAt = shot ? 0.3 : 0.2, hitAt = shot ? 0.4 : 0.45, kick = shot ? 0.12 : 0.3;
+    await tween(dur, (k) => {
+      const r = k < fireAt ? k / fireAt : Math.max(0, 1 - (k - fireAt) / (1 - fireAt));
+      p.root.position.copy(base).addScaledVector(fwd, -kick * r);
+      if (k >= fireAt && !fired) { fired = true; flash(shoulder.clone().setY(0.1), shot ? 0xffd27a : 0xff8a2a, shot ? 0.5 : 1.2); tracer(shoulder, aim); }
+      if (k >= hitAt && !hit) { hit = true; onHit(); }
+    });
+  } else if (style === 'strafe') {
+    const shotAt = [0.2, 0.3, 0.4]; let n = 0;
+    await tween(0.7, (k) => {
+      const w = Math.sin(Math.PI * k);
+      p.root.position.copy(base).addScaledVector(fwd, 0.9 * w); p.root.position.y = p.lift + 0.6 * w;
+      if (n < shotAt.length && k >= shotAt[n]) { n++; tracer(p.root.position.clone().setY(p.lift + 0.4), aim, 0xffe9a8); }
+      if (k >= 0.45 && !hit) { hit = true; onHit(); }
+    });
+  } else if (style === 'ram') {
+    await tween(0.45, (k) => {
+      const w = Math.sin(Math.PI * k);
+      p.root.position.copy(base).addScaledVector(fwd, 0.9 * w);
+      if (k >= 0.4 && !hit) { hit = true; onHit(); }
+    });
+  } else if (style === 'slash') {
+    let arc = false;
+    await tween(0.55, (k) => {
+      const w = Math.sin(Math.PI * k);
+      p.root.position.copy(base).addScaledVector(fwd, 0.5 * w);
+      p.inner.rotation.x = -0.2 * w;
+      p.swing = k;
+      if (k >= 0.4 && !arc) { arc = true; slashArc(victimPos.clone().lerp(base, 0.5), fwd); }
+      if (k >= 0.5 && !hit) { hit = true; onHit(); }
+    });
+  } else {
+    await tween(0.5, (k) => {
+      const w = Math.sin(Math.PI * k);
+      p.root.position.copy(base).addScaledVector(fwd, 0.7 * w);
+      p.inner.rotation.x = 0.4 * w;
+      if (k >= 0.45 && !hit) { hit = true; onHit(); }
+    });
+  }
   p.inner.rotation.x = 0; p.swing = 0; p.root.position.copy(base);
 }
 async function die(v) {
