@@ -177,11 +177,35 @@ async function slide(p, to, dur = 0.55, hop = 0) {
   });
   play(p, 'Idle');
 }
-// Attack style per piece. Pieces without a matching style fall back to 'slash' (humanoid) or 'bite'.
+// Attack style per piece as [melee, ranged]: melee at 1 square, ranged further out.
 const STYLE = {
-  dragons: { pawn: 'bite', knight: 'slash', bishop: 'slash', rook: 'breath', queen: 'breath', king: 'bite' },
-  ww2: { pawn: 'shot', knight: 'ram', bishop: 'shot', rook: 'cannon', queen: 'strafe', king: 'shot' },
+  dragons: { pawn: ['bite', 'bite'], knight: ['spear', 'spear'], bishop: ['slash', 'missile'], rook: ['bite', 'breath'], queen: ['bite', 'breath'], king: ['bite', 'bite'] },
+  ww2: { pawn: ['bite', 'shot'], knight: ['ram', 'ram'], bishop: ['shot', 'shot'], rook: ['cannon', 'cannon'], queen: ['strafe', 'strafe'], king: ['shot', 'shot'] },
 };
+const styleOf = (p, d) => { const pair = STYLE[p.skinKey]?.[p.role]; return pair ? pair[d <= 1 ? 0 : 1] : (p.humanoid ? 'slash' : 'bite'); };
+const HIT = { missile: 0xc9a8ff, spear: 0xffd27a, shot: 0xffd27a, cannon: 0xffb050, strafe: 0xffe9a8, ram: 0xe6eeff, slash: 0xe6eeff, bite: 0xff8a2a };
+// Short-lived mesh flying from->to (plus arc height); optional fading trail colour. Owns and frees its geometry and material.
+function projectile(geo, color, from, to, dur, arc = 0, trail = null) {
+  const m = new THREE.MeshBasicMaterial({ color, transparent: true }), o = new THREE.Mesh(geo, m); scene.add(o);
+  const at = (k, v) => v.lerpVectors(from, to, k).setY(v.y + arc * Math.sin(Math.PI * k));
+  let tg = null, tm = null, tl = null;
+  if (trail !== null) { tg = new THREE.BufferGeometry(); tm = new THREE.LineBasicMaterial({ color: trail, transparent: true }); tl = new THREE.Line(tg, tm); scene.add(tl); }
+  return tween(dur, (k) => {
+    at(k, o.position); o.lookAt(at(Math.min(1, k + 0.02), new THREE.Vector3()));
+    if (tl) { tg.setFromPoints([at(Math.max(0, k - 0.3), new THREE.Vector3()), o.position.clone()]); tm.opacity = 1 - 0.6 * k; }
+  }).then(() => {
+    scene.remove(o); geo.dispose(); m.dispose();
+    if (tl) { scene.remove(tl); tg.dispose(); tm.dispose(); }
+  });
+}
+// Expanding ring on the board where a hit lands.
+function burst(pos, color = 0xffe08a, size = 2.6) {
+  const geo = new THREE.RingGeometry(0.2, 0.35, 32).rotateX(-Math.PI / 2);
+  const m = new THREE.MeshBasicMaterial({ color, transparent: true, side: THREE.DoubleSide });
+  const r = new THREE.Mesh(geo, m); r.position.set(pos.x, 0.12, pos.z); scene.add(r);
+  return tween(0.4, (k) => { r.scale.setScalar(0.3 + size * k); m.opacity = 1 - k; })
+    .then(() => { scene.remove(r); geo.dispose(); m.dispose(); });
+}
 function tracer(from, to, color = 0xffe08a) {
   const g = new THREE.BufferGeometry().setFromPoints([from, to]);
   const m = new THREE.LineBasicMaterial({ color, transparent: true });
@@ -199,9 +223,9 @@ function slashArc(center, dir, color = 0xe6eeff) {
   return tween(0.3, (k) => { const a = -0.8 + 1.6 * k; arc.rotateZ(a - last); last = a; m.opacity = 1 - k; })
     .then(() => { scene.remove(arc); geo.dispose(); m.dispose(); });
 }
-async function strike(p, victimPos, onHit) {
+async function strike(p, victimPos, onHit, style) {
   face(p, victimPos);
-  const breath = p.actions.FireBreath ? 'FireBreath' : p.actions.PoisonBreath ? 'PoisonBreath' : null;
+  const breath = style === 'breath' ? (p.actions.FireBreath ? 'FireBreath' : p.actions.PoisonBreath ? 'PoisonBreath' : null) : null;
   const base = p.root.position.clone();
   const fwd = victimPos.clone().sub(base).setY(0).normalize();
   if (breath) {
@@ -209,12 +233,16 @@ async function strike(p, victimPos, onHit) {
     const ts = Math.max(1, clip.duration / 1.3);
     play(p, breath, { once: true, timeScale: ts });
     const dur = clip.duration / ts;
-    let breathHit = false;
-    await tween(dur, (k) => { if (k >= 0.45 && !breathHit) { breathHit = true; onHit(); } });
+    let breathHit = false, balls = 0;
+    const head = base.clone().addScaledVector(fwd, 0.8).setY(base.y + 2.2);
+    await tween(dur, (k) => {
+      // Crystal Dragon has no flame node, so fake the fire with fireballs
+      if (breath === 'FireBreath' && balls < 4 && k >= 0.25 + 0.04 * balls) { balls++; projectile(new THREE.SphereGeometry(0.12, 10, 8), 0xff7a2a, head, victimPos.clone().setY(1.1), 0.3, 0, 0xffaa55); }
+      if (k >= 0.45 && !breathHit) { breathHit = true; onHit(); }
+    });
     play(p, 'Idle');
     return;
   }
-  const style = STYLE[p.skinKey]?.[p.role] || (p.humanoid ? 'slash' : 'bite');
   const shoulder = base.clone().addScaledVector(fwd, 0.6).setY(1.1);   // where a shot leaves
   const aim = victimPos.clone().setY(1.1);
   let hit = false, fired = false;
@@ -227,6 +255,21 @@ async function strike(p, victimPos, onHit) {
       if (k >= fireAt && !fired) { fired = true; flash(shoulder.clone().setY(0.1), shot ? 0xffd27a : 0xff8a2a, shot ? 0.5 : 1.2); tracer(shoulder, aim); }
       if (k >= hitAt && !hit) { hit = true; onHit(); }
     });
+  } else if (style === 'missile') {
+    const hand = base.clone().setY(base.y + 1.4);
+    await projectile(new THREE.SphereGeometry(0.18, 12, 8), 0x9a6bff, hand, aim, 0.45, 0.8, 0xc9a8ff);
+    onHit();
+  } else if (style === 'spear') {
+    const hand = p.root.getObjectByName('attach-righthand-mesh');
+    const start = base.clone().setY(base.y + 1.4), top = base.clone().setY(base.y + 6);
+    const cone = () => new THREE.ConeGeometry(0.06, 0.7, 8).rotateX(Math.PI / 2);
+    try {
+      await tween(0.25, (k) => { p.swing = 0.5 * k; });
+      if (hand) hand.visible = false;
+      await projectile(cone(), 0xffd27a, start, top, 0.3, 0, 0xffe9a8);
+      await projectile(cone(), 0xffd27a, top, aim, 0.25, 0, 0xffe9a8);
+      onHit();
+    } finally { if (hand) hand.visible = true; p.swing = 0; }
   } else if (style === 'strafe') {
     const shotAt = [0.2, 0.3, 0.4]; let n = 0;
     await tween(0.7, (k) => {
@@ -275,11 +318,16 @@ async function attack(a, v) {
   const target = v.root.position.clone();
   const dir = target.clone().sub(a.root.position).setY(0).normalize();
   const stand = target.clone().addScaledVector(dir, -1.15);
-  await slide(a, stand, 0.4);
+  const d = Math.max(Math.abs(a.sq.charCodeAt(0) - v.sq.charCodeAt(0)), Math.abs(a.sq[1] - v.sq[1]));
+  const style = styleOf(a, d), poison = !!a.actions.PoisonBreath, ranged = d > 1;
+  // Ranged missile/spear fire from the attacker's own square; the long-range queen flies in; everything else walks up.
+  if (ranged && style === 'breath' && poison) await slide(a, stand, 0.9, 3);
+  else if (!(ranged && (style === 'missile' || style === 'spear'))) await slide(a, stand, 0.4);
+  const hit = style === 'breath' ? (poison ? 0x6fdc4a : 0xff7a2a) : HIT[style];
   let victimDown;
   await strike(a, target, () => {
-    flash(target); shake(); victimDown = die(v);
-  });
+    flash(target, hit); burst(target, hit); shake(); victimDown = die(v);
+  }, style);
   await victimDown;
 }
 
