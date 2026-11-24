@@ -320,9 +320,9 @@ async function attack(a, v) {
   const stand = target.clone().addScaledVector(dir, -1.15);
   const d = Math.max(Math.abs(a.sq.charCodeAt(0) - v.sq.charCodeAt(0)), Math.abs(a.sq[1] - v.sq[1]));
   const style = styleOf(a, d), poison = !!a.actions.PoisonBreath, ranged = d > 1;
-  // Ranged missile/spear fire from the attacker's own square; the long-range queen flies in; everything else walks up.
+  // Bishops (missile, or the WW2 medic's shot) and the spear fire from their own square; the long-range queen flies in; everything else walks up.
   if (ranged && style === 'breath' && poison) await slide(a, stand, 0.9, 3);
-  else if (!(ranged && (style === 'missile' || style === 'spear'))) await slide(a, stand, 0.4);
+  else if (!(ranged && (style === 'missile' || style === 'spear' || a.role === 'bishop'))) await slide(a, stand, 0.4);
   const hit = style === 'breath' ? (poison ? 0x6fdc4a : 0xff7a2a) : HIT[style];
   let victimDown;
   await strike(a, target, () => {
