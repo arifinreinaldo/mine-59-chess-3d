@@ -1,0 +1,5 @@
+node_modules/
+bundle.js
+*.png
+.playwright-cli/
+main.js.bak

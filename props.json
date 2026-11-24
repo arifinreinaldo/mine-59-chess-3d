@@ -1,0 +1,322 @@
+{
+ "coiled-dragon-pillar-7d526a": {
+  "title": "Coiled Dragon Pillar",
+  "credit": "Coiled Dragon Pillar by Polyfork (https://polyfork.dev/asset/coiled-dragon-pillar-7d526a), CC BY 4.0",
+  "bytes": 147500,
+  "size": {
+   "x": 7,
+   "y": 9,
+   "z": 2.2
+  }
+ },
+ "ancient-dragon-skull-7be378": {
+  "title": "Ancient Dragon Skull",
+  "credit": "Ancient Dragon Skull by Polyfork (https://polyfork.dev/asset/ancient-dragon-skull-7be378), CC BY 4.0",
+  "bytes": 155648,
+  "size": {
+   "x": 2.08,
+   "y": 2.16,
+   "z": 4.13
+  }
+ },
+ "gold-hoard-mound-d0a2be": {
+  "title": "Gold Hoard Mound",
+  "credit": "Gold Hoard Mound by Polyfork (https://polyfork.dev/asset/gold-hoard-mound-d0a2be), CC BY 4.0",
+  "bytes": 91432,
+  "size": {
+   "x": 4.91,
+   "y": 1.84,
+   "z": 4.86
+  }
+ },
+ "flame-brazier-bbf74a": {
+  "title": "Flame Brazier",
+  "credit": "Flame Brazier by Polyfork (https://polyfork.dev/asset/flame-brazier-bbf74a), CC BY 4.0",
+  "bytes": 131340,
+  "size": {
+   "x": 0.85,
+   "y": 0.8,
+   "z": 0.85
+  }
+ },
+ "dragonfire-brazier-6bc2ce": {
+  "title": "Dragonfire Brazier",
+  "credit": "Dragonfire Brazier by Polyfork (https://polyfork.dev/asset/dragonfire-brazier-6bc2ce), CC BY 4.0",
+  "bytes": 83240,
+  "size": {
+   "x": 1.04,
+   "y": 1.59,
+   "z": 1.2
+  }
+ },
+ "lair-stalagmite-7d4d95": {
+  "title": "Lair Stalagmite",
+  "credit": "Lair Stalagmite by Polyfork (https://polyfork.dev/asset/lair-stalagmite-7d4d95), CC BY 4.0",
+  "bytes": 69444,
+  "size": {
+   "x": 2.09,
+   "y": 3,
+   "z": 2.09
+  }
+ },
+ "lair-crystal-column-877d1a": {
+  "title": "Glowing Crystal Cluster",
+  "credit": "Glowing Crystal Cluster by Polyfork (https://polyfork.dev/asset/lair-crystal-column-877d1a), CC BY 4.0",
+  "bytes": 60964,
+  "size": {
+   "x": 1.51,
+   "y": 1.64,
+   "z": 1.13
+  }
+ },
+ "giant-dragon-rib-0e42d9": {
+  "title": "Giant Dragon Rib",
+  "credit": "Giant Dragon Rib by Polyfork (https://polyfork.dev/asset/giant-dragon-rib-0e42d9), CC BY 4.0",
+  "bytes": 79848,
+  "size": {
+   "x": 6.9,
+   "y": 5.97,
+   "z": 2.5
+  }
+ },
+ "ember-dragon-egg-0700c7": {
+  "title": "Ember Dragon Egg",
+  "credit": "Ember Dragon Egg by Polyfork (https://polyfork.dev/asset/ember-dragon-egg-0700c7), CC BY 4.0",
+  "bytes": 86556,
+  "size": {
+   "x": 0.49,
+   "y": 0.73,
+   "z": 0.49
+  }
+ },
+ "geode-dragon-egg-89141e": {
+  "title": "Geode Dragon Egg",
+  "credit": "Geode Dragon Egg by Polyfork (https://polyfork.dev/asset/geode-dragon-egg-89141e), CC BY 4.0",
+  "bytes": 76684,
+  "size": {
+   "x": 0.63,
+   "y": 0.7,
+   "z": 0.61
+  }
+ },
+ "miasma-dragon-egg-4b66e0": {
+  "title": "Miasma Dragon Egg",
+  "credit": "Miasma Dragon Egg by Polyfork (https://polyfork.dev/asset/miasma-dragon-egg-4b66e0), CC BY 4.0",
+  "bytes": 359460,
+  "size": {
+   "x": 0.58,
+   "y": 0.6,
+   "z": 0.56
+  }
+ },
+ "skull-and-bone-scatter-3dea4c": {
+  "title": "Skull and Bone Scatter",
+  "credit": "Skull and Bone Scatter by Polyfork (https://polyfork.dev/asset/skull-and-bone-scatter-3dea4c), CC BY 4.0",
+  "bytes": 203000,
+  "size": {
+   "x": 1.38,
+   "y": 0.32,
+   "z": 0.88
+  }
+ },
+ "obsidian-fang-rock-67e326": {
+  "title": "Obsidian Fang Rock",
+  "credit": "Obsidian Fang Rock by Polyfork (https://polyfork.dev/asset/obsidian-fang-rock-67e326), CC BY 4.0",
+  "bytes": 38256,
+  "size": {
+   "x": 1.23,
+   "y": 2.9,
+   "z": 0.95
+  }
+ },
+ "dragon-skeleton-88de43": {
+  "title": "Dragon Skeleton",
+  "credit": "Dragon Skeleton by Polyfork (https://polyfork.dev/asset/dragon-skeleton-88de43), CC BY 4.0",
+  "bytes": 273336,
+  "size": {
+   "x": 6.4,
+   "y": 2.21,
+   "z": 5.7
+  }
+ },
+ "bone-warning-totem-56cf4a": {
+  "title": "Bone Warning Totem",
+  "credit": "Bone Warning Totem by Polyfork (https://polyfork.dev/asset/bone-warning-totem-56cf4a), CC BY 4.0",
+  "bytes": 111444,
+  "size": {
+   "x": 1.94,
+   "y": 2.81,
+   "z": 0.46
+  }
+ },
+ "overflowing-treasure-chest-3d6ee0": {
+  "title": "Overflowing Treasure Chest",
+  "credit": "Overflowing Treasure Chest by Polyfork (https://polyfork.dev/asset/overflowing-treasure-chest-3d6ee0), CC BY 4.0",
+  "bytes": 160136,
+  "size": {
+   "x": 1.51,
+   "y": 1.13,
+   "z": 1.53
+  }
+ },
+ "sandbag-wall-section-7075ee": {
+  "title": "Sandbag Wall Section",
+  "credit": "Sandbag Wall Section by Polyfork (https://polyfork.dev/asset/sandbag-wall-section-7075ee), CC BY 4.0",
+  "bytes": 60972,
+  "size": {
+   "x": 4,
+   "y": 1.2,
+   "z": 0.61
+  }
+ },
+ "czech-hedgehog-d77ae5": {
+  "title": "Czech Hedgehog",
+  "credit": "Czech Hedgehog by Polyfork (https://polyfork.dev/asset/czech-hedgehog-d77ae5), CC BY 4.0",
+  "bytes": 51896,
+  "size": {
+   "x": 1.79,
+   "y": 1.46,
+   "z": 1.91
+  }
+ },
+ "barbed-wire-fence-section-a01906": {
+  "title": "Barbed Wire Fence Section",
+  "credit": "Barbed Wire Fence Section by Polyfork (https://polyfork.dev/asset/barbed-wire-fence-section-a01906), CC BY 4.0",
+  "bytes": 89044,
+  "size": {
+   "x": 3.97,
+   "y": 1.35,
+   "z": 1.23
+  }
+ },
+ "anti-aircraft-searchlight-ba3f07": {
+  "title": "Anti-Aircraft Searchlight",
+  "credit": "Anti-Aircraft Searchlight by Polyfork (https://polyfork.dev/asset/anti-aircraft-searchlight-ba3f07), CC BY 4.0",
+  "bytes": 88604,
+  "size": {
+   "x": 2.64,
+   "y": 2.4,
+   "z": 2.54
+  }
+ },
+ "radar-aerial-mast-f88914": {
+  "title": "Radar Aerial Mast",
+  "credit": "Radar Aerial Mast by Polyfork (https://polyfork.dev/asset/radar-aerial-mast-f88914), CC BY 4.0",
+  "bytes": 79724,
+  "size": {
+   "x": 3.68,
+   "y": 8,
+   "z": 3.36
+  }
+ },
+ "barrage-balloon-2edc43": {
+  "title": "Barrage Balloon",
+  "credit": "Barrage Balloon by Polyfork (https://polyfork.dev/asset/barrage-balloon-2edc43), CC BY 4.0",
+  "bytes": 83564,
+  "size": {
+   "x": 4.47,
+   "y": 9.17,
+   "z": 8.72
+  }
+ },
+ "sentry-box-fc915e": {
+  "title": "Sentry Box",
+  "credit": "Sentry Box by Polyfork (https://polyfork.dev/asset/sentry-box-fc915e), CC BY 4.0",
+  "bytes": 169472,
+  "size": {
+   "x": 1.39,
+   "y": 2.68,
+   "z": 1.42
+  }
+ },
+ "concrete-pillbox-ea855a": {
+  "title": "Concrete Pillbox",
+  "credit": "Concrete Pillbox by Polyfork (https://polyfork.dev/asset/concrete-pillbox-ea855a), CC BY 4.0",
+  "bytes": 91512,
+  "size": {
+   "x": 4,
+   "y": 2.17,
+   "z": 4
+  }
+ },
+ "ammunition-crate-a5c550": {
+  "title": "Ammunition Crate",
+  "credit": "Ammunition Crate by Polyfork (https://polyfork.dev/asset/ammunition-crate-a5c550), CC BY 4.0",
+  "bytes": 79460,
+  "size": {
+   "x": 1.11,
+   "y": 0.52,
+   "z": 0.51
+  }
+ },
+ "shelled-townhouse-2483d1": {
+  "title": "Shelled Townhouse",
+  "credit": "Shelled Townhouse by Polyfork (https://polyfork.dev/asset/shelled-townhouse-2483d1), CC BY 4.0",
+  "bytes": 160968,
+  "size": {
+   "x": 8,
+   "y": 12.52,
+   "z": 8
+  }
+ },
+ "nissen-hut-dafb56": {
+  "title": "Nissen Hut",
+  "credit": "Nissen Hut by Polyfork (https://polyfork.dev/asset/nissen-hut-dafb56), CC BY 4.0",
+  "bytes": 131272,
+  "size": {
+   "x": 4,
+   "y": 4.53,
+   "z": 8
+  }
+ },
+ "blackout-lamp-post-3af3ca": {
+  "title": "Blackout Lamp Post",
+  "credit": "Blackout Lamp Post by Polyfork (https://polyfork.dev/asset/blackout-lamp-post-3af3ca), CC BY 4.0",
+  "bytes": 44976,
+  "size": {
+   "x": 1.37,
+   "y": 3.98,
+   "z": 0.83
+  }
+ },
+ "field-hospital-marquee-8cf79b": {
+  "title": "Field Hospital Marquee",
+  "credit": "Field Hospital Marquee by Polyfork (https://polyfork.dev/asset/field-hospital-marquee-8cf79b), CC BY 4.0",
+  "bytes": 186608,
+  "size": {
+   "x": 7.98,
+   "y": 3.2,
+   "z": 8
+  }
+ },
+ "splintered-roadside-poplar-5859d8": {
+  "title": "Splintered Roadside Poplar",
+  "credit": "Splintered Roadside Poplar by Polyfork (https://polyfork.dev/asset/splintered-roadside-poplar-5859d8), CC BY 4.0",
+  "bytes": 49076,
+  "size": {
+   "x": 2.26,
+   "y": 9,
+   "z": 2.09
+  }
+ },
+ "minefield-warning-sign-296d9e": {
+  "title": "Minefield Warning Sign",
+  "credit": "Minefield Warning Sign by Polyfork (https://polyfork.dev/asset/minefield-warning-sign-296d9e), CC BY 4.0",
+  "bytes": 29256,
+  "size": {
+   "x": 0.59,
+   "y": 1,
+   "z": 0.1
+  }
+ },
+ "field-grave-marker-15380b": {
+  "title": "Field Grave Marker",
+  "credit": "Field Grave Marker by Polyfork (https://polyfork.dev/asset/field-grave-marker-15380b), CC BY 4.0",
+  "bytes": 66420,
+  "size": {
+   "x": 0.52,
+   "y": 0.8,
+   "z": 0.19
+  }
+ }
+}

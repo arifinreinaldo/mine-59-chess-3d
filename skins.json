@@ -1,0 +1,158 @@
+{
+ "dragons": {
+  "name": "Dragons",
+  "pieces": {
+   "pawn": {
+    "id": "red-fire-dragonling-5207c8",
+    "title": "Red Fire Dragonling",
+    "cls": "animal",
+    "skeleton": false,
+    "clips": [
+     "Walk",
+     "Idle",
+     "Run"
+    ],
+    "credit": "Red Fire Dragonling by Polyfork (https://polyfork.dev/asset/red-fire-dragonling-5207c8), CC BY 4.0",
+    "bytes": 1800252
+   },
+   "knight": {
+    "id": "dragon-slayer-91ab39",
+    "title": "Dragon Slayer",
+    "cls": "character",
+    "skeleton": true,
+    "clips": [
+     "Idle",
+     "Walk",
+     "Run"
+    ],
+    "credit": "Dragon Slayer by Polyfork (https://polyfork.dev/asset/dragon-slayer-91ab39), CC BY 4.0",
+    "bytes": 1078088
+   },
+   "bishop": {
+    "id": "dragon-keeper-c3980f",
+    "title": "Dragon Keeper",
+    "cls": "character",
+    "skeleton": true,
+    "clips": [
+     "Idle",
+     "Walk",
+     "Run"
+    ],
+    "credit": "Dragon Keeper by Polyfork (https://polyfork.dev/asset/dragon-keeper-c3980f), CC BY 4.0",
+    "bytes": 1050660
+   },
+   "rook": {
+    "id": "crystal-dragon-683de4",
+    "title": "Crystal Dragon",
+    "cls": "animal",
+    "skeleton": false,
+    "clips": [
+     "Walk",
+     "Idle",
+     "Run",
+     "FireBreath"
+    ],
+    "credit": "Crystal Dragon by Polyfork (https://polyfork.dev/asset/crystal-dragon-683de4), CC BY 4.0",
+    "bytes": 2463984
+   },
+   "queen": {
+    "id": "green-gas-dragon-2d0ffb",
+    "title": "Green Gas Dragon",
+    "cls": "animal",
+    "skeleton": false,
+    "clips": [
+     "Walk",
+     "Idle",
+     "Run",
+     "PoisonBreath"
+    ],
+    "credit": "Green Gas Dragon by Polyfork (https://polyfork.dev/asset/green-gas-dragon-2d0ffb), CC BY 4.0",
+    "bytes": 5473104
+   },
+   "king": {
+    "id": "purple-flame-dragon-72f7dd",
+    "title": "Purple Flame Dragon",
+    "cls": "animal",
+    "skeleton": false,
+    "clips": [
+     "Idle",
+     "Walk",
+     "Run"
+    ],
+    "credit": "Purple Flame Dragon by Polyfork (https://polyfork.dev/asset/purple-flame-dragon-72f7dd), CC BY 4.0",
+    "bytes": 1986060
+   }
+  }
+ },
+ "ww2": {
+  "name": "World War II",
+  "pieces": {
+   "pawn": {
+    "id": "infantry-rifleman-c1c0a5",
+    "title": "Infantry Rifleman",
+    "cls": "character",
+    "skeleton": true,
+    "clips": [
+     "Idle",
+     "Walk",
+     "Run"
+    ],
+    "credit": "Infantry Rifleman by Polyfork (https://polyfork.dev/asset/infantry-rifleman-c1c0a5), CC BY 4.0",
+    "bytes": 805196
+   },
+   "knight": {
+    "id": "scout-jeep-c02efe",
+    "title": "Scout Jeep",
+    "cls": "vehicle",
+    "skeleton": false,
+    "clips": [],
+    "credit": "Scout Jeep by Polyfork (https://polyfork.dev/asset/scout-jeep-c02efe), CC BY 4.0",
+    "bytes": 206144
+   },
+   "bishop": {
+    "id": "field-medic-fd8919",
+    "title": "Field Medic",
+    "cls": "character",
+    "skeleton": true,
+    "clips": [
+     "Idle",
+     "Walk",
+     "Run"
+    ],
+    "credit": "Field Medic by Polyfork (https://polyfork.dev/asset/field-medic-fd8919), CC BY 4.0",
+    "bytes": 796352
+   },
+   "rook": {
+    "id": "medium-tank-65da6b",
+    "title": "Medium Tank",
+    "cls": "vehicle",
+    "skeleton": false,
+    "clips": [],
+    "credit": "Medium Tank by Polyfork (https://polyfork.dev/asset/medium-tank-65da6b), CC BY 4.0",
+    "bytes": 301064
+   },
+   "queen": {
+    "id": "single-engine-fighter-a6addf",
+    "title": "Single-Engine Fighter",
+    "cls": "vehicle",
+    "skeleton": false,
+    "clips": [],
+    "credit": "Single-Engine Fighter by Polyfork (https://polyfork.dev/asset/single-engine-fighter-a6addf), CC BY 4.0",
+    "bytes": 238208
+   },
+   "king": {
+    "id": "squad-officer-e5c52b",
+    "title": "Squad Officer",
+    "cls": "character",
+    "skeleton": true,
+    "clips": [
+     "Idle",
+     "Walk",
+     "Run"
+    ],
+    "credit": "Squad Officer by Polyfork (https://polyfork.dev/asset/squad-officer-e5c52b), CC BY 4.0",
+    "bytes": 760904
+   }
+  }
+ }
+}
